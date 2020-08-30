@@ -1,1 +1,47 @@
-{"data":{"className":"Post","properties":{"id":{"name":"id","reference":"scalar","primary":true,"type":"number"},"createdAt":{"name":"createdAt","reference":"scalar","type":"date","getter":false,"setter":false},"updatedAt":{"name":"updatedAt","reference":"scalar","type":"date","getter":false,"setter":false},"title":{"name":"title","reference":"scalar","type":"text","getter":false,"setter":false}},"hooks":{},"indexes":[],"uniques":[],"path":"./dist/src/entities/Post.js","name":"Post","constructorParams":[],"toJsonParams":[],"useCache":true,"primaryKeys":["id"],"compositePK":false,"collection":"post"},"origin":"./dist/src/entities/Post.js","hash":"d9a2622db9518830651ea9d3a8aa02a7"}
+{
+	"data": {
+		"className": "Post",
+		"properties": {
+			"id": {
+				"name": "id",
+				"reference": "scalar",
+				"primary": true,
+				"type": "number"
+			},
+			"createdAt": {
+				"name": "createdAt",
+				"reference": "scalar",
+				"type": "date",
+				"getter": false,
+				"setter": false
+			},
+			"updatedAt": {
+				"name": "updatedAt",
+				"reference": "scalar",
+				"type": "date",
+				"getter": false,
+				"setter": false
+			},
+			"title": {
+				"name": "title",
+				"reference": "scalar",
+				"type": "text",
+				"getter": false,
+				"setter": false
+			}
+		},
+		"hooks": {},
+		"indexes": [],
+		"uniques": [],
+		"path": "./dist/src/entities/Post.js",
+		"name": "Post",
+		"constructorParams": [],
+		"toJsonParams": [],
+		"useCache": true,
+		"primaryKeys": ["id"],
+		"compositePK": false,
+		"collection": "post"
+	},
+	"origin": "./dist/src/entities/Post.js",
+	"hash": "d9a2622db9518830651ea9d3a8aa02a7"
+}
