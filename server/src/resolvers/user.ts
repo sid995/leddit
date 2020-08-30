@@ -6,6 +6,7 @@ import {
   Field,
   Ctx,
   ObjectType,
+  Query,
 } from "type-graphql";
 import { MyContext } from "../types";
 import { User } from "../entities/User";
@@ -40,10 +41,21 @@ class UserResponse {
 
 @Resolver()
 export class UserResolver {
+  @Query(() => User, { nullable: true })
+  async me(
+    @Ctx() { req, em }: MyContext
+  ) {
+    if (!req.session.userId) {
+      return null
+    }
+
+    const user = await em.findOne(User, { id: req.session.userId })
+    return user;
+  }
   @Mutation(() => UserResponse)
   async register(
     @Arg("options") options: UsernamePasswordInput,
-    @Ctx() { em }: MyContext
+    @Ctx() { req, em }: MyContext
   ): Promise<UserResponse> {
     if (options.username.length <= 2) {
       return {
@@ -76,7 +88,6 @@ export class UserResolver {
       await em.persistAndFlush(user);
     } catch (err) {
       // duplicate username error
-      // if(err.code === '23505' || err.detail.includes("already")){
       if (err.code === "23505") {
         return {
           errors: [
@@ -89,13 +100,18 @@ export class UserResolver {
       }
       console.log("Error message: ", err.message);
     }
+
+    // store user id session
+    // Auto login registered user
+    req.session.userId = user.id
+
     return { user };
   }
 
   @Mutation(() => UserResponse)
   async login(
     @Arg("options") options: UsernamePasswordInput,
-    @Ctx() { em }: MyContext
+    @Ctx() { em, req }: MyContext
   ): Promise<UserResponse> {
     const user = await em.findOne(User, { username: options.username });
     if (!user) {
@@ -119,6 +135,8 @@ export class UserResolver {
         ],
       };
     }
+
+    req.session.userId = user.id
 
     return { user };
   }
