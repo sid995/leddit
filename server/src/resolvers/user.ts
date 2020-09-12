@@ -50,6 +50,12 @@ export class UserResolver {
 		const user = await em.findOne(User, { id: req.session.userId });
 		return user;
 	}
+
+	@Query(() => [User])
+	users(@Ctx() { em }: MyContext): Promise<User[]> {
+		return em.find(User, {});
+	}
+
 	@Mutation(() => UserResponse)
 	async register(
 		@Arg("options") options: UsernamePasswordInput,
