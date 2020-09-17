@@ -1,5 +1,7 @@
 import React from 'react'
 import { NavBar } from '../components/NavBar'
+import { withUrqlClient } from 'next-urql';
+import { createUrqlClient } from '../utils/createUrqlClient';
 
 const Index: React.FC = ({ }) => {
   return (
@@ -10,4 +12,4 @@ const Index: React.FC = ({ }) => {
   );
 }
 
-export default Index
+export default withUrqlClient(createUrqlClient, { ssr: true })(Index)
