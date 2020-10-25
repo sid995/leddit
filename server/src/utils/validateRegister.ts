@@ -32,7 +32,7 @@ export const validateRegister = (options: UsernamePasswordInput) => {
 		return [
 			{
 				field: "password",
-				message: "Length must be greater than 2"
+				message: "Password length must be greater than 2"
 			}
 		];
 	}
